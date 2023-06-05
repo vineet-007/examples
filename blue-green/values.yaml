@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: adamtravis/rollouts
-  tag: green
+  tag: yellow
 
 service:
   type: LoadBalancer
