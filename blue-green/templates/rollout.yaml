@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: sample-rollout
+  labels:
+    app: color-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: color-deployment
+  strategy:
+    blueGreen:
+      # activeService: {{ .Values.activeServiceName }}
+      activeService: blue-deployment
+      previewService: green-deployment
+  template:
+    metadata:
+      labels:
+        app: color-deployment
+    spec:
+      containers:
+        - name: color
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
