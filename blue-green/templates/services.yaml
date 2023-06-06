@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blue-deployment
+  name: rolloutService
   labels:
     app: color-deployment
 spec:
@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: green-deployment
+  name: rolloutService-preview
   labels:
     app: color-deployment
 spec:
