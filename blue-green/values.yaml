@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: adamtravis/rollouts
-  tag: yellow
+  tag: blue
 
 service:
   type: ClusterIP
