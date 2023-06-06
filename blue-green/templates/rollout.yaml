@@ -13,7 +13,7 @@ spec:
     blueGreen:
       # activeService: {{ .Values.activeServiceName }}
       activeService: blue-deployment
-#       previewService: green-deployment
+      previewService: green-deployment
       autoPromotionEnabled: false 
   template:
     metadata:
