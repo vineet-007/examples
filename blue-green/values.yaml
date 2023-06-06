@@ -5,7 +5,7 @@ image:
   tag: yellow
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
 
 # resources: {}
