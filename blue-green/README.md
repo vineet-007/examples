@@ -2,7 +2,7 @@
 
 Implementing the blue green strategy using Argo rollouts
 
-1. Install Argo Rollouts controller: https://github.com/argoproj/argo-rollouts#installation
+1. Install Argo Rollouts controller and kubectl plugin: https://github.com/argoproj/argo-rollouts#installation
 
 2. Create a sample application and sync it.
 
@@ -17,7 +17,7 @@ Once the application is synced you can access it using `rolloutService` service.
 [![Screenshot-2023-06-06-131257.png](https://i.postimg.cc/G2NBK5LN/Screenshot-2023-06-06-131257.png)](https://postimg.cc/G8FhhzsJ)
 
 
-3. Change image version parameter in spec.template to trigger blue-green deployment process or alternatively run the following command if you are not using argoCD:
+3. Change image version parameter to trigger blue-green deployment process or alternatively run the following command if you are not using argoCD:
 ```
 kubectl argo rollouts set image sample-rollout color=argoproj/rollouts-demo:green
 ```
