@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: adamtravis/rollouts
-  tag: green
+  repository: argoproj/rollouts-demo
+  tag: blue
 
 service:
   type: ClusterIP
