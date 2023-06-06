@@ -11,8 +11,8 @@ spec:
       app: color-deployment
   strategy:
     blueGreen:
-      activeService: rolloutService
-      previewService: rolloutService-preview
+      activeService: rollout-service
+      previewService: rollout-service-preview
       autoPromotionEnabled: false 
   template:
     metadata:
