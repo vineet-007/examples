@@ -11,9 +11,8 @@ spec:
       app: color-deployment
   strategy:
     blueGreen:
-      # activeService: {{ .Values.activeServiceName }}
-      activeService: blue-deployment
-      previewService: green-deployment
+      activeService: rolloutService
+      previewService: rolloutService-preview
       autoPromotionEnabled: false 
   template:
     metadata:
