@@ -2,29 +2,31 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rollout-service
+  name: bluegreen-demo-preview
   labels:
-    app: color-deployment
+    app: bluegreen-demo
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: http
       protocol: TCP
+      name: http
   selector:
-    app: color-deployment
+    app: bluegreen-demo
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: rollout-service-preview
+  name: bluegreen-demo
   labels:
-    app: color-deployment
+    app: bluegreen-demo
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
+  - port: {{ .Values.service.port }}
+    targetPort: http
+    protocol: TCP
+    name: http
   selector:
-    app: color-deployment
+    app: bluegreen-demo    
