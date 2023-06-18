@@ -1,36 +1,34 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: sample-rollout
-  labels:
-    app: color-deployment
+  name: bluegreen-demo
 spec:
   replicas: {{ .Values.replicaCount }}
-  selector:
-    matchLabels:
-      app: color-deployment
   strategy:
     blueGreen:
-      activeService: rollout-service
-      previewService: rollout-service-preview
-      autoPromotionEnabled: false 
+      autoPromotionEnabled: true
+      activeService: bluegreen-demo
+      previewService: bluegreen-demo-preview
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: bluegreen-demo
   template:
     metadata:
       labels:
-        app: color-deployment
+        app: bluegreen-demo
     spec:
       containers:
-        - name: color
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+      - name: bluegreen-demo
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m    
+
+
+          
