@@ -1,17 +1,10 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: argoproj/rollouts-demo
   tag: green
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
 
-# resources: {}
-#   limits:
-#    cpu: 100m
-#    memory: 128Mi
-#   requests:
-#    cpu: 100m
-#    memory: 128Mi
