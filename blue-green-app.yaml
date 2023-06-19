@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blue-green-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/vineet-007/examples.git
+    targetRevision: HEAD
+    path: blue-green
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: blue-green
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
