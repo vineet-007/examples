@@ -18,8 +18,8 @@ crossplane-stable/crossplane \
 ```
 
 3. IRSA Configurations
-3.1 Enable the IAM OIDC provider for EKS.
-3.2 Creating an IAM policy granting the AWS provider access to AWS resources.
+  1. Enable the IAM OIDC provider for EKS.
+  2. Creating an IAM policy granting the AWS provider access to AWS resources.
 
 
 4. Creating an IAM role for the AWS provider to associate with the AWS provider.
