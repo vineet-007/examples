@@ -1,0 +1,16 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    clusterIdentifierRef:
+      name: example
+    engine: aurora-postgresql
+    instanceClass: db.t2.micro
+    tags:
+      Owner: vineet.nair@intuitive.cloud
+      Name: Vineet Nair
+  providerConfigRef:
+    name: default    

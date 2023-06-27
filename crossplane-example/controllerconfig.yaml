@@ -1,0 +1,9 @@
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: irsa-controllerconfig
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::587172484624:role/EKS_Test_Role
+spec:
+
+#CONTROLLERCONFIG DOESN'T REQUIRE A SPEC FIELD
