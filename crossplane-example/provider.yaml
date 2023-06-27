@@ -7,12 +7,5 @@ spec:
   controllerConfigRef:
     name: irsa-controllerconfig
 
----
-# apiVersion: v1
-# kind: ServiceAccount
-# metadata:
-#   name: crossplane-sa
-#   namespace: crossplane-system
-#   annotations:
-#     eks.amazonaws.com/role-arn: arn:aws:iam::587172484624:role/EKS_Test_Role
+
                                 
