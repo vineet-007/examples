@@ -3,6 +3,7 @@ kind: ControllerConfig
 metadata:
   name: irsa-controllerconfig
   annotations:
+  # CHANGE THE BELOW ANNOTATION ACCORDINGLY
     eks.amazonaws.com/role-arn: arn:aws:iam::587172484624:role/EKS_Test_Role
 spec:
 
