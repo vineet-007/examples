@@ -1,6 +1,8 @@
 apiVersion: custom-api.example.org/v1alpha1
 kind: database
 metadata:
-  name: dynamodb-and-s3
+  name: my-composite-resource
 spec: 
-  region: "US"
+  parameters:
+    region: us-east-1
+    readCapacity: 2
