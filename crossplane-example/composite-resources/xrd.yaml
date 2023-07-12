@@ -18,13 +18,20 @@ spec:
           spec:
             type: object
             properties:
-              region:
-                type: string
-                oneOf:
-                  - pattern: '^EU$'
-                  - pattern: '^US$'
+              parameters:
+                type: object
+                properties:
+                  readCapacity:
+                    type: integer
+                    description: provisioned read capacity of the dynamoDB table
+                  region:
+                    type: string
+                    description: region where the s3 bucket and dynamoDB table will be deployed
+                required:
+                  - readCapacity
+                  - region
             required:
-              - region
+              - parameters
   # claimNames:
   #   kind: custom-database
   #   plural: custom-databases
