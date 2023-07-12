@@ -18,6 +18,9 @@ spec:
             region: us-east-1
           providerConfigRef:
             name: default
+      patches:
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"         
     - name: dynamoDB
       base:
         apiVersion: dynamodb.aws.upbound.io/v1beta1
@@ -33,3 +36,8 @@ spec:
               - name: S3ID
                 type: S
             hashKey: S3ID
+      patches:
+        - fromFieldPath: "spec.parameters.readCapacity"
+          toFieldPath: "spec.forProvider.readCapacity"      
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"              
