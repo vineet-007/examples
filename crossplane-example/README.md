@@ -43,3 +43,5 @@ Note - It may take up to five minutes for the provider to list HEALTHY as True. 
 ```
 kubectl apply -f providerconfig.yaml
 ```
+
+7. Once everything is in its place apply the test-bucket.yaml to create an s3 bucket.
