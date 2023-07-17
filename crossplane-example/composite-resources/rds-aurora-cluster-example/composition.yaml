@@ -1,0 +1,98 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: rds-aurora-cluster
+spec:
+  compositeTypeRef:
+    apiVersion: custom-api.example.org/v1alpha1
+    kind: rdscluster
+  resources:
+    - name: Cluster
+      base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: Cluster
+        metadata:
+          name: example
+          annotations:
+            meta.upbound.io/example-id: rds/v1beta1/cluster
+            crossplane.io/external-name: example
+          labels:
+            crossplane.io/external-name: example
+        spec:
+          forProvider:
+            region: us-east-1
+            engine: aurora-postgresql
+            masterUsername: admin1
+            masterPasswordSecretRef:
+              name: sample-cluster-password1
+              namespace: crossplane-system
+              key: password
+            skipFinalSnapshot: true
+            databaseName: auroradb
+            dbClusterParameterGroupName: example
+          writeConnectionSecretToRef:
+            name: sample-rds-cluster-secret
+            namespace: crossplane-system
+          providerConfigRef:
+            name: default    
+      #   apiVersion: s3.aws.upbound.io/v1beta1
+      #   kind: Bucket
+      #   metadata:
+      #     name: crossplane-bucket6124
+      #   spec:
+      #     forProvider:
+      #       region: us-east-1
+      #     providerConfigRef:
+      #       name: default
+      patches:
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"         
+    - name: ClusterParameterGroup
+      base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: ClusterParameterGroup
+        metadata:
+          name: example
+          annotations:
+            crossplane.io/external-name: example
+        spec:
+          forProvider:
+            region: us-east-1
+            description: RDS default cluster parameter group
+            family: aurora-postgresql14
+            parameter:
+              - name: character_set_server
+                value: utf8
+              - name: character_set_client
+                value: utf8
+          providerConfigRef:
+            name: default     
+      patches:    
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"    
+    - name: ClusterInstance
+      base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: ClusterInstance
+        metadata:
+          name: example
+          annotations:
+            crossplane.io/external-name: example
+        spec:
+          forProvider:
+            region: us-east-1
+            clusterIdentifierSelector:
+              matchLabels:
+                crossplane.io/external-name: example
+            engine: aurora-postgresql
+            instanceClass: db.t2.micro
+            tags:
+              Owner: vineet.nair@intuitive.cloud
+              Name: Vineet Nair
+          providerConfigRef:
+            name: default    
+      patches:    
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"   
+        - fromFieldPath: "spec.parameters.engine"
+          toFieldPath: "spec.forProvider.engine"                   

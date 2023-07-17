@@ -1,0 +1,37 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: rdsclusters.custom-api.example.org
+spec:
+  group: custom-api.example.org
+  names:
+    kind: rdscluster
+    plural: rdsclusters
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  engine:
+                    type: string
+                    description: size of the Database in GB - integer
+                  region:
+                    type: string
+                    description: name of the new DB inside the DB instance - string
+                required:
+                  - engine
+                  - region
+            required:
+              - parameters
+  # claimNames:
+  #   kind: custom-database
+  #   plural: custom-databases

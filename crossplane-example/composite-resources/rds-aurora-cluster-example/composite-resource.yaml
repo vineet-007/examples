@@ -1,0 +1,8 @@
+apiVersion: custom-api.example.org/v1alpha1
+kind: rdscluster
+metadata:
+  name: example
+spec: 
+  parameters:
+    region: us-east-1
+    engine: aurora-postgresql
