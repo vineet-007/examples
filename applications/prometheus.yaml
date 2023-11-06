@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+  - repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus
+    # targetRevision: 25.0.0
+    helm:
+      valueFiles:
+      - $values/helm-values/kube-prometheus-stack/values.yaml
+  - repoURL: 'https://github.com/vineet-007/examples.git'
+    targetRevision: argocd
+    ref: values 
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prometheus1
+  syncPolicy:
+    syncOptions:
+    - ServerSideApply=true 
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true  

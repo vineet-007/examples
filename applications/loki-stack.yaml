@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+  - repoURL: https://grafana.github.io/loki/charts
+    chart: loki-stack
+    # targetRevision: 25.0.0
+    helm:
+      valueFiles:
+      - $values/helm-values/loki-stack/values.yaml
+  - repoURL: 'https://github.com/vineet-007/examples.git'
+    targetRevision: argocd
+    ref: values 
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: loki1
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true  

@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+  - repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus
+    targetRevision: 45.28.0
+    helm:
+      valueFiles:
+      - $values/helm-values/kube-prometheus-stack/values.yaml
+  - repoURL: 'https://github.com/vineet-nair-itp/intuitive-devsecops-tooling.git'
+    targetRevision: argocd
+    ref: values 
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-prometheus-stack
+  syncPolicy:
+    syncOptions:
+    - ServerSideApply=true #workaround to solve too long annotation error 
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true  
