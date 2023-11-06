@@ -15,7 +15,7 @@ spec:
       valueFiles:
       - $values/helm-values/kube-prometheus-stack/values.yaml
   - repoURL: 'https://github.com/vineet-007/examples.git'
-    targetRevision: argocd
+    targetRevision: main
     ref: values 
   destination:
     server: https://kubernetes.default.svc
