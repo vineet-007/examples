@@ -7,19 +7,19 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-  - repoURL: https://grafana.github.io/loki/charts
+  sources:
+  - repoURL: https://grafana.github.io/helm-charts
     chart: loki-stack
-    # targetRevision: 25.0.0
+    targetRevision: 2.9.11
     helm:
       valueFiles:
-      - $values/helm-values/loki-stack/values.yaml
+      - $values/helm-values/loki/values.yaml
   - repoURL: 'https://github.com/vineet-007/examples.git'
     targetRevision: main
     ref: values 
   destination:
     server: https://kubernetes.default.svc
-    namespace: loki1
+    namespace: loki
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

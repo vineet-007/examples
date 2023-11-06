@@ -7,19 +7,19 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
+  sources:
   - repoURL: https://prometheus-community.github.io/helm-charts
     chart: prometheus
-    # targetRevision: 25.0.0
+    targetRevision: 25.4.0
     helm:
       valueFiles:
-      - $values/helm-values/kube-prometheus-stack/values.yaml
+      - $values/helm-values/prometheus/values.yaml
   - repoURL: 'https://github.com/vineet-007/examples.git'
     targetRevision: main
     ref: values 
   destination:
     server: https://kubernetes.default.svc
-    namespace: prometheus1
+    namespace: prometheus
   syncPolicy:
     syncOptions:
     - ServerSideApply=true 
