@@ -1,0 +1,9 @@
+replicaCount: 2
+
+image:
+  repository: argoproj/rollouts-demo
+  tag: blue
+
+service:
+  type: NodePort
+  port: 80
