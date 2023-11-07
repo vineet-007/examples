@@ -11,7 +11,7 @@ imagePullSecrets:
 ##
 serviceAccounts:
   alertmanager:
-    create: true
+    create: false
     name:
   kubeStateMetrics:
     create: true
@@ -29,7 +29,7 @@ serviceAccounts:
 alertmanager:
   ## If false, alertmanager will not be installed
   ##
-  enabled: true
+  enabled: false
 
   ## alertmanager container name
   ##
