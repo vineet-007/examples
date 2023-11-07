@@ -1,8 +1,8 @@
 replicaCount: 2
 
 image:
-  repository: argoproj/rollouts-demo
-  tag: green
+  repository: obitouchiha/my-docker-app
+  tag: latest
 
 service:
   type: NodePort
